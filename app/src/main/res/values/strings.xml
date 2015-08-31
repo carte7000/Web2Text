@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Web2Text</string>
+
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="gcm_defaultSenderId">929337260087</string>
+</resources>
