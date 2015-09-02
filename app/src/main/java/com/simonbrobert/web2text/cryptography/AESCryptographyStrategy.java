@@ -1,6 +1,7 @@
 package com.simonbrobert.web2text.cryptography;
 
 import com.simonbrobert.web2text.CryptographyStrategy;
+import com.simonbrobert.web2text.domain.Message;
 
 import java.security.GeneralSecurityException;
 import java.security.spec.KeySpec;
@@ -29,11 +30,26 @@ public class AESCryptographyStrategy implements CryptographyStrategy {
         this.aes = new AesUtil(128, 2);
     }
 
-    public String encrypt(String message) throws Throwable {
+    private String encrypt(String message) throws Throwable {
         return aes.encrypt(SALT,IV, key, message);
     }
 
-    public String decrypt(String message) throws Throwable {
+    private String decrypt(String message) throws Throwable {
         return aes.decrypt(SALT,IV,key,message);
+    }
+
+    @Override
+    public Message encrypt(Message message) throws Throwable {
+        Message encryptedMessage = message;
+        encryptedMessage.content = encrypt(message.content);
+        return encryptedMessage;
+
+    }
+
+    @Override
+    public Message decrypt(Message message) throws Throwable {
+        Message decryptedMessage = message;
+        decryptedMessage.content = decrypt(message.content);
+        return decryptedMessage;
     }
 }

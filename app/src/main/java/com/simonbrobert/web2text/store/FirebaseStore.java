@@ -40,9 +40,8 @@ public class FirebaseStore implements Store {
     public void saveMessage(Message message) {
         //.child(message.getDistantNumber())
         try {
-            message.content = cryptographyStrategy.encrypt(message.content);
+            message = cryptographyStrategy.encrypt(message);
         } catch (Throwable throwable) {
-            message.content = null;
         }
         ref.child("conversations").child(message.getDistantNumber()).child("messages").push().setValue(message);
     }
@@ -65,9 +64,8 @@ public class FirebaseStore implements Store {
             lastReceivedMessageEpoch = Epoch.getCurrentEpoch();
             if(strategy != null) {
                 try {
-                    message.content = cryptographyStrategy.decrypt(message.content);
+                    message = cryptographyStrategy.decrypt(message);
                 } catch (Throwable throwable) {
-                    message.content = null;
                 }
                 strategy.newMessageInStore(message);
             }

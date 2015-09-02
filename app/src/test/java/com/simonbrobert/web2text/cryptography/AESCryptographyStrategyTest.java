@@ -1,5 +1,7 @@
 package com.simonbrobert.web2text.cryptography;
 
+import com.simonbrobert.web2text.domain.Message;
+
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -24,8 +26,10 @@ public class AESCryptographyStrategyTest {
 
     @Test
     public void decryptWithTestKeyAndTestMessageShouldReturnSameAsCryptoJSResult() throws Throwable {
+        Message message = new Message("");
+        message.content = CRYPTOJS_RESULT;
         aesCryptographyStrategy = new AESCryptographyStrategy(TEST_KEY);
-        String result = aesCryptographyStrategy.decrypt(CRYPTOJS_RESULT);
+        String result = aesCryptographyStrategy.decrypt(message).content;
         assertEquals(result, TEST_MESSAGE);
     }
 }
