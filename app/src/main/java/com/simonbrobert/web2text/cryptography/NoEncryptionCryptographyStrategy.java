@@ -1,4 +1,6 @@
-package com.simonbrobert.web2text;
+package com.simonbrobert.web2text.cryptography;
+
+import com.simonbrobert.web2text.CryptographyStrategy;
 
 /**
  * Created by Simon on 2015-08-30.
