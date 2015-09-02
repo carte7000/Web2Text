@@ -5,13 +5,11 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
 import com.firebase.client.Firebase;
-import com.simonbrobert.web2text.AESCryptographyStrategy;
 import com.simonbrobert.web2text.AuthToken;
 import com.simonbrobert.web2text.CryptographyStrategy;
-import com.simonbrobert.web2text.NoEncryptionCryptographyStrategy;
 import com.simonbrobert.web2text.OnUserSendSMSStrategy;
 import com.simonbrobert.web2text.Web2TextPreferences;
-import com.simonbrobert.web2text.serviceLocator.ServiceLocator;
+import com.simonbrobert.web2text.cryptography.AESCryptographyStrategy;
 import com.simonbrobert.web2text.sms.StoreSMSOnReceivedSMSStrategy;
 import com.simonbrobert.web2text.LoginHandler;
 import com.simonbrobert.web2text.OnNewStoreMessageStrategy;
@@ -20,8 +18,6 @@ import com.simonbrobert.web2text.sms.StoreSMSOnUserSendSMSStrategy;
 import com.simonbrobert.web2text.store.SendSMSOnNewStoreMessageStrategy;
 import com.simonbrobert.web2text.sms.StandardSmsAdapter;
 import com.simonbrobert.web2text.store.FirebaseStore;
-
-import java.util.prefs.Preferences;
 
 /**
  * Created by Simon on 2015-08-25.
@@ -40,7 +36,7 @@ public class StandardLoginHandler implements LoginHandler {
     public void apply(AuthToken authToken) {
         Firebase ref = new Firebase("https://web2text.firebaseIO.com/");
         Firebase userRef = ref.child(authToken.getUserId());
-        CryptographyStrategy cryptographyStrategy = new NoEncryptionCryptographyStrategy();
+        CryptographyStrategy cryptographyStrategy = new AESCryptographyStrategy(authToken.getUserId());
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
 
         StandardSmsAdapter smsAdapter = new StandardSmsAdapter(context, cryptographyStrategy);

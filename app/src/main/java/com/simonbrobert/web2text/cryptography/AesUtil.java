@@ -93,11 +93,13 @@ public class AesUtil {
     }
     
     public static String base64(byte[] bytes) {
-        return Base64.encodeBase64String(bytes);
+        return android.util.Base64.encodeToString(bytes, android.util.Base64.DEFAULT);
+        //return Base64.encodeBase64String(bytes);
     }
     
     public static byte[] base64(String str) {
-        return Base64.decodeBase64(str);
+        return android.util.Base64.decode(str, android.util.Base64.DEFAULT);
+        //return Base64.decodeBase64(str);
     }
     
     public static String hex(byte[] bytes) {

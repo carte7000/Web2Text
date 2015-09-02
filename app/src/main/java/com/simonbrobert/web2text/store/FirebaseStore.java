@@ -39,7 +39,11 @@ public class FirebaseStore implements Store {
     @Override
     public void saveMessage(Message message) {
         //.child(message.getDistantNumber())
-        message.content = cryptographyStrategy.encrypt(message.content);
+        try {
+            message.content = cryptographyStrategy.encrypt(message.content);
+        } catch (Throwable throwable) {
+            message.content = null;
+        }
         ref.child("conversations").child(message.getDistantNumber()).child("messages").push().setValue(message);
     }
 
@@ -60,7 +64,11 @@ public class FirebaseStore implements Store {
             Message message = builder.createSentSMS(receiverNumber, content, source, false);
             lastReceivedMessageEpoch = Epoch.getCurrentEpoch();
             if(strategy != null) {
-                message.content = cryptographyStrategy.decrypt(message.content);
+                try {
+                    message.content = cryptographyStrategy.decrypt(message.content);
+                } catch (Throwable throwable) {
+                    message.content = null;
+                }
                 strategy.newMessageInStore(message);
             }
         }
