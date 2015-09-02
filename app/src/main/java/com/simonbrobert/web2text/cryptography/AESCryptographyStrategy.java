@@ -1,6 +1,8 @@
 package com.simonbrobert.web2text.cryptography;
 
 import com.simonbrobert.web2text.CryptographyStrategy;
+import com.simonbrobert.web2text.R;
+import com.simonbrobert.web2text.Web2TextPreferences;
 import com.simonbrobert.web2text.domain.Message;
 
 import java.security.GeneralSecurityException;
@@ -18,8 +20,8 @@ import javax.crypto.spec.SecretKeySpec;
  */
 public class AESCryptographyStrategy implements CryptographyStrategy {
 
-    private static final String IV = "F27D5C9927726BCEFE7510B1BDD3D137";
-    private static final String SALT = "3FF2EC019C627B945225DEBAD71A01B6985FE84C95A70EB132882F88C0A59A55";
+    private static final String IV = Web2TextPreferences.AES_IV;
+    private static final String SALT = Web2TextPreferences.AES_SALT;
 
 
     private String key;

@@ -6,6 +6,7 @@ import android.telephony.TelephonyManager;
 
 import com.firebase.client.Firebase;
 import com.simonbrobert.web2text.AuthenticationProvider;
+import com.simonbrobert.web2text.Web2TextPreferences;
 import com.simonbrobert.web2text.auth.FirebaseAuthenticationProvider;
 import com.simonbrobert.web2text.domain.MessageBuilder;
 import com.simonbrobert.web2text.serviceLocator.ServiceLocator;
@@ -22,7 +23,7 @@ public class DemoContext extends Context {
 
         Firebase.setAndroidContext(context);
 
-        Firebase ref = new Firebase("https://web2text.firebaseIO.com/");
+        Firebase ref = new Firebase(Web2TextPreferences.FIREBASE_REF_URL);
         AuthenticationProvider provider = new FirebaseAuthenticationProvider(ref, context);
 
         serviceLocator.register(MessageBuilder.class, messageBuilder);
