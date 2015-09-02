@@ -1,4 +1,7 @@
-package com.simonbrobert.web2text;
+package com.simonbrobert.web2text.cryptography;
+
+import com.simonbrobert.web2text.AESHelper;
+import com.simonbrobert.web2text.CryptographyStrategy;
 
 import java.io.UnsupportedEncodingException;
 import java.security.InvalidKeyException;
